@@ -1,0 +1,34 @@
+<project name="food-pricer" default="dist" basedir=".">
+	
+   <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src" destdir="target/classes">
+            <classpath>
+                   <fileset dir="lib">
+                      <include name="**/*.jar" />
+                   </fileset>
+             </classpath>
+        </javac>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="target/"/>
+        <jar destfile="target/food-pricing-1.0-SNAPSHOT.jar" basedir="target/classes">
+            <manifest>
+                <attribute name="Main-Class" value="com.aaron.pricing.FoodPricerCLI"/>
+            	<attribute name="Class-Path" value="lib/testng-5.12.1.jar"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="target/food-pricing-1.0-SNAPSHOT.jar" fork="true"/>
+    </target>
+
+	<target name="dist" depends="clean,compile,jar"/>
+	
+</project>
